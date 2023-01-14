@@ -13,7 +13,7 @@ export function floodFill(
     img.setColor(x, y, replacementColor)
 
     // Get List of Valid neighbors to the current pixel we pointing at.
-    let Neighbors = getNeighbors(img, x, y, targetColor, replacementColor)
+    let Neighbors = getNeighbors({ img, x, y, targetColor })
 
     for (const Neighbor of Neighbors) {
         const ix = Neighbor[0]
@@ -26,7 +26,7 @@ export function floodFill(
 
 
 // return a List of Valid neighbors to the current pixel we pointing at.
-function getNeighbors(img: Image, x: number, y: number, targetColor: Color, replacementColor: Color) {
+function getNeighbors({ img, x, y, targetColor }: { img: Image; x: number; y: number; targetColor: Color; }): any[] {
 
     // Get all possible neightbors from north, south, east, west of the current pixel.
     const possibleNeighbors = [
@@ -56,7 +56,7 @@ function getNeighbors(img: Image, x: number, y: number, targetColor: Color, repl
 }
 
 // Check if image cordinates is valid
-function isValidImgCordinates(img: Image, x: number, y: number) {
+function isValidImgCordinates(img: Image, x: number, y: number): boolean {
     if (x > img.width || y > img.height) {
         return false
     } else {
